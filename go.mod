@@ -1,3 +1,3 @@
-module github.com.bisoncorp.graph
+module github.com/bisoncorp/graph
 
 go 1.20

@@ -2,8 +2,8 @@ package dijkstra
 
 import (
 	"container/heap"
-	"github.com.bisoncorp.graph"
 	"math"
+	"github.com/bisoncorp/graph"
 )
 
 type nodeInfo struct {
@@ -47,8 +47,8 @@ func (p *priorityQueue) update(n *nodeInfo, cost int) {
 	heap.Fix(p, n.qIndex)
 }
 
-func ShortestPath(graph graph.Graph, start, end int) []int {
-	graphNodes := graph.Nodes()
+func ShortestPath(grp graph.Interface, start, end int) []int {
+	graphNodes := grp.Nodes()
 	var unvisitedQueue priorityQueue = make([]*nodeInfo, 0, len(graphNodes))
 	var nodesInfo = make([]*nodeInfo, len(graphNodes))
 	for i, n := range graphNodes {

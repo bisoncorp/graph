@@ -1,9 +1,9 @@
 package dijkstra
 
 import (
-	graph3 "gitlab.com/diegorosalio19/GoUtils/graph"
 	"reflect"
 	"testing"
+	"github.com/bisoncorp/graph"
 )
 
 type link struct {
@@ -23,41 +23,41 @@ type node struct {
 	links []*link
 }
 
-func (n *node) Links() []graph3.Link {
-	links := make([]graph3.Link, len(n.links))
+func (n *node) Links() []graph.Link {
+	links := make([]graph.Link, len(n.links))
 	for i, l := range n.links {
 		links[i] = l
 	}
 	return links
 }
 
-type graph struct {
+type grp struct {
 	nodes []*node
 }
 
-func (g *graph) Nodes() []graph3.Node {
-	nodes := make([]graph3.Node, len(g.nodes))
+func (g *grp) Nodes() []graph.Node {
+	nodes := make([]graph.Node, len(g.nodes))
 	for i, n := range g.nodes {
 		nodes[i] = n
 	}
 	return nodes
 }
 
-func (g *graph) addLink(a, b, cost int) {
+func (g *grp) addLink(a, b, cost int) {
 	l := new(link)
 	l.weight = cost
 	l.nodeIndex = b
 	g.nodes[a].links = append(g.nodes[a].links, l)
 }
 
-func (g *graph) addNode() {
+func (g *grp) addNode() {
 	n := new(node)
 	n.links = make([]*link, 0)
 	g.nodes = append(g.nodes, n)
 }
 
-func newGraph(mat [][]int) graph3.Graph {
-	g := &graph{nodes: make([]*node, 0)}
+func newGraph(mat [][]int) graph.Interface {
+	g := &grp{nodes: make([]*node, 0)}
 	for a, ws := range mat {
 		g.addNode()
 		for b, w := range ws {
@@ -91,7 +91,7 @@ var graph2 = newGraph([][]int{
 
 func TestShortestPath(t *testing.T) {
 	type args struct {
-		graph graph3.Graph
+		graph graph.Interface
 		start int
 		end   int
 	}

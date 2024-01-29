@@ -9,6 +9,6 @@ type Link interface {
 	Weight() int
 }
 
-type Graph interface {
+type Interface interface {
 	Nodes() []Node
 }
